@@ -1,7 +1,7 @@
 library(rtracklayer)
 library(tidyverse)
 library(data.table)
-gtf_original <- rtracklayer::import("gencode.v43.annotation.gtf") %>% as.data.frame()
+gtf_original <- rtracklayer::import("gencode.v45.annotation.gtf") %>% as.data.frame()
 
 setDT(gtf_original)
 # Filter for only 'CDS' and 'UTR'
@@ -34,4 +34,4 @@ annotated_gtf <- annotated_gtf %>% dplyr::select(-CDS_Start,-CDS_End)
 gtf_without_cds_utr <- gtf_original[!type %in% c("CDS", "UTR")]
 
 final_gtf <- rbind(gtf_without_cds_utr,annotated_gtf)
-rtracklayer::export("gencode.v43.annotation_utr_corrected.gtf")
+rtracklayer::export("gencode.v45.annotation_utr_corrected.gtf")
